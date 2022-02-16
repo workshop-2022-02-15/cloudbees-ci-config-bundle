@@ -1,11 +1,31 @@
+cloudbees-slack-integration:
+  config:
+    slackToken: "${slackToken}"
+    slackWorkspace: "T010A455W77"
+    users:
+    - id: "${GITHUB_USER}"
+      jenkins: "${GITHUB_USER}"
+      optedIn: true
+      scmId: "${GITHUB_USER}"
+      slack: "bbankole@salucro.com"
+      slackWorkspace: "T010A455W77"
+cloudbees-pipeline-policies:
+  config:
+    policies:
+    - action: "fail"
+      name: "Timeout policy"
+      rules:
+      - entirePipelineTimeoutRule:
+          maxTime: 30
 jenkins:
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
   globalNodeProperties:
   - envVars:
       env:
       - key: "BUNDLE_ID"
         value: "${CASC_BUNDLE_ID}"
   quietPeriod: 0
-  systemMessage: 'Jenkins configured using CloudBees CI CasC - v2'
+  systemMessage: 'Jenkins configured using CloudBees CI CasC - v5'
 globalCloudBeesPipelineTemplateCatalog:
   catalogs:
   - branchOrTag: "main"
@@ -45,7 +65,7 @@ unclassified:
     durabilityHint: PERFORMANCE_OPTIMIZED
   globallibraries:
     libraries:
-    - defaultVersion: "main"
+    - defaultVersion: "module-2"
       name: "pipeline-library"
       retriever:
         modernSCM:
